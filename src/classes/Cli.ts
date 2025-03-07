@@ -295,14 +295,12 @@ class Cli {
         // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
         // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
         const selectedVehicle = answers.vehicleToTow;
-        
-        if(selectedVehicle.weight > truck.towingCapacity){
-          console.log(`You cannot tow ${answers.vehicle.make} ${answers.vehicle.model}`)
-        } else {
-          console.log(`You are towing ${answers.vehicle.make} ${answers.vehicle.model}`)
-        }
 
-        this.performActions();
+        if(selectedVehicle.weight > truck.towingCapacity){
+          console.log(`You cannot tow ${selectedVehicle.make} ${selectedVehicle.model}`)
+        } else {
+          console.log(`You are towing ${selectedVehicle.make} ${selectedVehicle.model}`)
+        }
       });
   }
 
