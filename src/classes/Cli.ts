@@ -282,25 +282,32 @@ class Cli {
           type: 'list',
           name: 'vehicleToTow',
           message: 'Select a vehicle to tow',
-          choices: this.vehicles.map((vehicle) => {
-            return {
-              name: `${vehicle.vin} -- ${vehicle.make} ${vehicle.model}`,
-              value: vehicle,
-            };
-          }),
+          choices: this.vehicles
+          .filter(vehicle => vehicle.vin !== truck.vin)
+          .map(vehicle => ({
+            name: `${vehicle.make} ${vehicle.model} (VIN: ${vehicle.vin})`,
+            value: vehicle.vin,
+            })),
         },
       ])
       .then((answers) => {
         // TODO: check if the selected vehicle is the truck
         // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
         // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
-        const selectedVehicle = answers.vehicleToTow;
+        const selectedVehicle = this.vehicles.find(v => v.vin === answers.vehicleToTow);
 
-        if(selectedVehicle.weight > truck.towingCapacity){
-          console.log(`You cannot tow ${selectedVehicle.make} ${selectedVehicle.model}`)
-        } else {
-          console.log(`You are towing ${selectedVehicle.make} ${selectedVehicle.model}`)
+        if (!selectedVehicle) {
+          console.log("Error: Invalid selection.");
+          return this.performActions();
         }
+
+        if (selectedVehicle.weight > truck.towingCapacity) {
+          console.log(`${selectedVehicle.make} ${selectedVehicle.model} is too heavy to be towed.`);
+        } else {
+          console.log(`${truck.make} ${truck.model} is towing ${selectedVehicle.make} ${selectedVehicle.model}.`);
+        }
+
+        this.performActions();
       });
   }
 
@@ -391,7 +398,7 @@ class Cli {
           const selectedVehicle = this.vehicles.find(v => v.vin === this.selectedVehicleVin);
 
           if (selectedVehicle instanceof Truck){
-            this.findVehicleToTow(selectedVehicle);
+            return this.findVehicleToTow(selectedVehicle);
           } else {
             console.log(`You cannot tow with a ${selectedVehicle?.make} ${selectedVehicle?.model}`);
           }
