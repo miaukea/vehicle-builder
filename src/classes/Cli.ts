@@ -113,8 +113,20 @@ class Cli {
           name: 'topSpeed',
           message: 'Enter Top Speed',
         },
+        { 
+          type: 'input', 
+          name: 'wheelDiameter', 
+          message: 'Enter Wheel Diameter' 
+        }
       ])
       .then((answers) => {
+        const wheels = [
+          new Wheel(answers.wheelDiameter),
+          new Wheel(answers.wheelDiameter),
+          new Wheel(answers.wheelDiameter),
+          new Wheel(answers.wheelDiameter),
+        ];
+
         const car = new Car(
           // TODO: The generateVin method is static and should be called using the class name Cli, make sure to use Cli.generateVin() for creating a truck and motorbike as well!
           Cli.generateVin(),
@@ -124,7 +136,7 @@ class Cli {
           parseInt(answers.year),
           parseInt(answers.weight),
           parseInt(answers.topSpeed),
-          []
+          wheels
         );
         // push the car to the vehicles array
         this.vehicles.push(car);
@@ -169,6 +181,10 @@ class Cli {
           name: 'topSpeed',
           message: 'Enter Top Speed',
         },
+        { type: 'input', 
+          name: 'wheelDiameter', 
+          message: 'Enter Wheel Diameter',
+        },
         {
           type: 'input',
           name: 'towingCapacity',
@@ -177,6 +193,13 @@ class Cli {
       ])
       .then((answers) => {
         // TODO: Use the answers object to pass the required properties to the Truck constructor
+        const wheels = [
+          new Wheel(answers.wheelDiameter),
+          new Wheel(answers.wheelDiameter),
+          new Wheel(answers.wheelDiameter),
+          new Wheel(answers.wheelDiameter),
+        ];
+
         const truck = new Truck(
           Cli.generateVin(),
           answers.color,
@@ -185,7 +208,7 @@ class Cli {
           parseInt(answers.year),
           parseInt(answers.weight),
           parseInt(answers.topSpeed),
-          [],
+          wheels,
           parseInt(answers.towingCapacity),
         );
         // TODO: push the truck to the vehicles array
@@ -254,6 +277,11 @@ class Cli {
       ])
       .then((answers) => {
         // TODO: Use the answers object to pass the required properties to the Motorbike constructor
+        const wheels = [
+          new Wheel(answers.frontWheelDiameter, answers.frontWheelBrand),
+          new Wheel(answers.rearWheelDiameter, answers.rearWheelBrand),
+        ];
+        
         const motorbike = new Motorbike(
           Cli.generateVin(),
           answers.color,
@@ -262,7 +290,7 @@ class Cli {
           parseInt(answers.year),
           parseInt(answers.weight),
           parseInt(answers.topSpeed),
-          []
+          wheels
         );
         // TODO: push the motorbike to the vehicles array
         this.vehicles.push(motorbike);
