@@ -25,9 +25,9 @@
 
   ## License
 
-This project is licensed under the **![License](https://img.shields.io/badge/license-MIT%20License-blue.svg)**.
+  This project is licensed under the **![License](https://img.shields.io/badge/license-MIT%20License-blue.svg)**.
 
-For more details, see: [MIT License License](https://opensource.org/licenses/MIT)
+  For more details, see: [MIT License License](https://opensource.org/licenses/MIT)
 
   ## Contributing
   Melody Iaukea-Gibson
@@ -39,6 +39,8 @@ For more details, see: [MIT License License](https://opensource.org/licenses/MIT
   4. Answer the following questions for the prompt
   5. Once the prompt is successfully filled out, the user can then choose different actions to perform with their vehicle(s)
   6. Once you are finished, enter "Exit" to exit the prompt
+
+  Here is a video walkthrough of how the program works: https://drive.google.com/file/d/1oCp00VmqXdlPQ4EnLzYEUMwJXS933adn/view?usp=sharingLinks to an external site. 
 
   ## Questions
   https://github.com/miaukea
